@@ -8,30 +8,31 @@ x_test = np.load('../_npy/news_test_data.npy',allow_pickle=True)
 y_predic = np.load('../_npy/news_topic_dict.npy',allow_pickle=True)
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Embedding, LSTM,Conv1D,Dropout,Bidirectional,Flatten
+from tensorflow.keras.layers import Dense, Embedding, LSTM,Conv1D,Dropout,Bidirectional,Flatten,MaxPooling1D,GlobalAveragePooling1D
 model = Sequential()     
-model.add(Embedding(input_dim=45654, output_dim=512,input_length=None))
+model.add(Embedding(input_dim=45655, output_dim=256,input_length=None))
 model.add(Conv1D(128,2,activation='relu'))
+
 model.add(Conv1D(64,2,activation='relu'))
+
 model.add(LSTM(128, return_sequences=True)) # bidirectional(양방향 LSTM)
 model.add(Dropout(0.4))
 model.add(Conv1D(128,2,activation='relu'))
+
 model.add(Conv1D(64,2,activation='relu'))
+
+model.add(MaxPooling1D(2))
 model.add(LSTM(128, return_sequences=True))
 model.add(Dropout(0.4))
 model.add(Conv1D(128,2,activation='relu'))
 model.add(Conv1D(64,2,activation='relu'))
+
 model.add(LSTM(128, return_sequences=True))
-model.add(Conv1D(128,2,activation='relu'))
-model.add(Conv1D(64,2,activation='relu',padding='valid'))
-model.add(LSTM(64))
-model.add(Dense(512, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
-model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
+
+model.add(MaxPooling1D(2))
+model.add(LSTM(128))
 model.add(Dense(7, activation= 'softmax'))
+
 '''
 
 '''
