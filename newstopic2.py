@@ -31,6 +31,13 @@ model.add(LSTM(128, return_sequences=True))
 
 model.add(MaxPooling1D(2))
 model.add(LSTM(128))
+model.add(Dense(256)) 
+model.add(Dense(128)) 
+model.add(Dense(64)) 
+model.add(Dense(32)) 
+model.add(Dense(16)) 
+model.add(Dense(8)) 
+
 model.add(Dense(7, activation= 'softmax'))
 
 '''
